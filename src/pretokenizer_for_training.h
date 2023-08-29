@@ -18,16 +18,16 @@
 #include <memory>
 #include <string>
 
+#include "absl/strings/string_view.h"
 #include "common.h"
 #include "sentencepiece.pb.h"
 #include "sentencepiece_processor.h"
-#include "third_party/absl/strings/string_view.h"
 
 namespace sentencepiece {
 namespace pretokenizer {
 
 class PretokenizerForTrainingInterface {
- public:
+public:
   PretokenizerForTrainingInterface() {}
   virtual ~PretokenizerForTrainingInterface() {}
   virtual util::Status status() const = 0;
@@ -52,12 +52,12 @@ class PretokenizerForTrainingInterface {
   // the input text.
   virtual SentencePieceText Tokenize(absl::string_view text) const = 0;
 
- private:
+private:
   static std::string Preprocess(absl::string_view text);
   static std::vector<std::string> Postprocess(const SentencePieceText &spt);
 };
 
-}  // namespace pretokenizer
-}  // namespace sentencepiece
+} // namespace pretokenizer
+} // namespace sentencepiece
 
-#endif  // PRETOKENIZER_FOR_TRAINING_H_
+#endif // PRETOKENIZER_FOR_TRAINING_H_

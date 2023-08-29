@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.!
 
-if (SPM_USE_EXTERNAL_ABSL)
-  set(ABSL_FLAGS_SRCS "")
-  set(ABSL_STRINGS_SRCS "")
-  list(APPEND SPM_LIBS absl::strings)
-  list(APPEND SPM_LIBS absl::flags)
-  list(APPEND SPM_LIBS absl::flags_parse)
-  if (MSVC)
-   add_definitions("/D_USE_EXTERNAL_ABSL")
-  else()
-   add_definitions("-D_USE_EXTERNAL_ABSL")
-  endif()
+
+set(ABSL_FLAGS_SRCS "")
+set(ABSL_STRINGS_SRCS "")
+list(APPEND SPM_LIBS absl::strings)
+list(APPEND SPM_LIBS absl::flags)
+list(APPEND SPM_LIBS absl::flags_parse)
+if (MSVC)
+    add_definitions("/D_USE_EXTERNAL_ABSL")
 else()
-  set(ABSL_FLAGS_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/absl/flags/flag.cc)
+    add_definitions("-D_USE_EXTERNAL_ABSL")
+
 endif()
 
 if (SPM_USE_BUILTIN_PROTOBUF)

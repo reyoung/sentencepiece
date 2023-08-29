@@ -151,10 +151,6 @@ if (SPM_BUILD_TEST)
   enable_testing()
 endif()
 
-if (SPM_USE_EXTERNAL_ABSL)
- add_subdirectory(third_party/abseil-cpp)
-endif()
-
 add_subdirectory(src)
 add_subdirectory(third_party)
 

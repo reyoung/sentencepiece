@@ -16,8 +16,8 @@
 #define INIT_H_
 
 #include "common.h"
-#include "third_party/absl/flags/flag.h"
-#include "third_party/absl/flags/parse.h"
+#include "absl/flags/flag.h"
+#include "absl/flags/parse.h"
 
 #ifdef _USE_EXTERNAL_PROTOBUF
 #include "google/protobuf/message_lite.h"
@@ -44,9 +44,6 @@ inline void ParseCommandLineFlags(const char *usage, int *argc, char ***argv,
 
 inline void ShutdownLibrary() {
   google::protobuf::ShutdownProtobufLibrary();
-#ifdef HAS_ABSL_CLEANUP_FLAGS
-  absl::CleanupFlags();
-#endif
 }
 
 class ScopedResourceDestructor {
