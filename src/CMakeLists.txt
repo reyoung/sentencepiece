@@ -294,61 +294,61 @@ endif()
 
 list(APPEND SPM_INSTALLTARGETS
   spm_encode spm_decode spm_normalize spm_train spm_export_vocab)
+#
+#if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
+#  install(TARGETS ${SPM_INSTALLTARGETS}
+#    BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
+#    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#else()
+#install(TARGETS ${SPM_INSTALLTARGETS}
+#  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#endif()
+#
+#install(FILES sentencepiece_trainer.h sentencepiece_processor.h
+#  DESTINATION ${CMAKE_INSTALL_INCDIR})
+#if (NOT SPM_USE_BUILTIN_PROTOBUF)
+#  install(FILES ${SPM_PROTO_HDRS} DESTINATION ${CMAKE_INSTALL_INCDIR})
+#endif()
+#
+#file(TO_NATIVE_PATH "${PROJECT_SOURCE_DIR}/data" data_dir)
+#
+#if (SPM_BUILD_TEST OR SPM_COVERAGE)
+#  enable_testing()
+#  add_executable(spm_test test_main.cc ${SPM_TEST_SRCS})
+#
+#  if (SPM_COVERAGE)
+#    target_link_libraries(spm_test sentencepiece sentencepiece_train "-lgcov")
+#  else()
+#    target_link_libraries(spm_test sentencepiece sentencepiece_train)
+#  endif()
+#
+#  set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --show-leak-kinds=definite,possible --error-exitcode=1")
+#  find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
+#  include(Dart)
+#
+#  add_test(NAME sentencepiece_test
+#    COMMAND $<TARGET_FILE:spm_test> --test_srcdir=${data_dir})
+#endif()
+#
+#if (SPM_COVERAGE)
+#  add_custom_target(coverage
+#    COMMAND mkdir -p coverage
+#    COMMAND $<TARGET_FILE:spm_test> --test_srcdir=${data_dir}
+#    COMMAND lcov -c -d . -o coverage.info
+#    COMMAND lcov --remove coverage.info "include*" "/c++" "_test*" "testharness*" "third_party*" ".pb.*" -o coverage.info
+#    COMMAND mkdir -p lcov_html
+#    COMMAND genhtml -o lcov_html coverage.info)
+#  add_dependencies(coverage spm_test)
+#endif()
 
-if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
-  install(TARGETS ${SPM_INSTALLTARGETS}
-    BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-else()
-install(TARGETS ${SPM_INSTALLTARGETS}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-endif()
-
-install(FILES sentencepiece_trainer.h sentencepiece_processor.h
-  DESTINATION ${CMAKE_INSTALL_INCDIR})
-if (NOT SPM_USE_BUILTIN_PROTOBUF)
-  install(FILES ${SPM_PROTO_HDRS} DESTINATION ${CMAKE_INSTALL_INCDIR})
-endif()
-
-file(TO_NATIVE_PATH "${PROJECT_SOURCE_DIR}/data" data_dir)
-
-if (SPM_BUILD_TEST OR SPM_COVERAGE)
-  enable_testing()
-  add_executable(spm_test test_main.cc ${SPM_TEST_SRCS})
-
-  if (SPM_COVERAGE)
-    target_link_libraries(spm_test sentencepiece sentencepiece_train "-lgcov")
-  else()
-    target_link_libraries(spm_test sentencepiece sentencepiece_train)
-  endif()
-
-  set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --show-leak-kinds=definite,possible --error-exitcode=1")
-  find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
-  include(Dart)
-
-  add_test(NAME sentencepiece_test
-    COMMAND $<TARGET_FILE:spm_test> --test_srcdir=${data_dir})
-endif()
-
-if (SPM_COVERAGE)
-  add_custom_target(coverage
-    COMMAND mkdir -p coverage
-    COMMAND $<TARGET_FILE:spm_test> --test_srcdir=${data_dir}
-    COMMAND lcov -c -d . -o coverage.info
-    COMMAND lcov --remove coverage.info "include*" "/c++" "_test*" "testharness*" "third_party*" ".pb.*" -o coverage.info
-    COMMAND mkdir -p lcov_html
-    COMMAND genhtml -o lcov_html coverage.info)
-  add_dependencies(coverage spm_test)
-endif()
-
-if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
-  set_xcode_property(spm_encode PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
-  set_xcode_property(spm_decode PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
-  set_xcode_property(spm_normalize PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
-  set_xcode_property(spm_train PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
-  set_xcode_property(spm_export_vocab PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
-endif()
+#if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
+#  set_xcode_property(spm_encode PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
+#  set_xcode_property(spm_decode PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
+#  set_xcode_property(spm_normalize PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
+#  set_xcode_property(spm_train PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
+#  set_xcode_property(spm_export_vocab PRODUCT_BUNDLE_IDENTIFIER "SentencePiece" All)
+#endif()
